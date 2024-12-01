@@ -4,9 +4,11 @@ import {
   AcademicSemesterName,
   Months,
 } from './academicSemester.constant';
-import { TAcademicSemseter } from './academicSemester.interface';
+import { TAcademicSemester } from './academicSemester.interface';
+// import { TAcademicSemseter } from './academicSemester.interface';
 
-const acdemicSemesterSchema = new Schema<TAcademicSemseter>(
+
+const acdemicSemesterSchema = new Schema<TAcademicSemester>(
   {
     name: {
       type: String,
