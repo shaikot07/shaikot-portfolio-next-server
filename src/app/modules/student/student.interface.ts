@@ -1,4 +1,4 @@
-import {  Date, Model, Types } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 export type TUserName = {
   firstName: string;
@@ -28,7 +28,7 @@ export type TStudent = {
   password: string;
   name: TUserName;
   gender: 'male' | 'female' | 'other';
-  dateOfBirth?: string;
+  dateOfBirth?: Date;
   email: string;
   contactNo: string;
   emergencyContactNo: string;
@@ -40,6 +40,7 @@ export type TStudent = {
   profileImg?: string;
   admissionSemester: Types.ObjectId;
   isDeleted: boolean;
+  academicDepartment: Types.ObjectId;
 };
 
 //for creating static
