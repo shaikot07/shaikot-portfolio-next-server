@@ -9,6 +9,7 @@ class QueryBuilder<T> {
     this.query = query;
   }
 
+//   search method 
   search(searchableFields: string[]) {
     const searchTerm = this?.query?.searchTerm;
     if (searchTerm) {
@@ -25,7 +26,20 @@ class QueryBuilder<T> {
     return this;
   }
 
-  
+//   method for filter 
+
+filter() {
+    const queryObj = { ...this.query }; // copy
+
+    // Filtering
+    const excludeFields = ['searchTerm', 'sort', 'limit', 'page', 'fields'];
+
+    excludeFields.forEach((el) => delete queryObj[el]);
+
+    this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>);
+
+    return this;
+  }
 
   
 
