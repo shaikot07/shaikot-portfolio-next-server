@@ -20,10 +20,10 @@ async function main() {
 
 main();
 
-//  this is   unhandledRejection uncaughtException  error handle
+//  this is   unhandledRejection uncaughtException  error handle 
  
  process.on('unhandledRejection', () => {
-  console.log(`😈 unahandledRejection is detected , shutting down ...`);
+  console.log(`😈 unhandledRejection is detected , shutting down ...`);
   if (server) {
     server.close(() => {
       process.exit(1);
