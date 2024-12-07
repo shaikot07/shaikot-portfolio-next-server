@@ -1,0 +1,1 @@
+//  here i made queray bilder dynamic 
