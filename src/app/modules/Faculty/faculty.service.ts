@@ -33,6 +33,7 @@ const getSingleFacultyFromDB = async (id: string) => {
 const updateFacultyIntoDB = async (id: string, payload: Partial<TFaculty>) => {
   const { name, ...remainingFacultyData } = payload;
 
+console.log("check paylod data",payload);
   const modifiedUpdatedData: Record<string, unknown> = {
     ...remainingFacultyData,
   };

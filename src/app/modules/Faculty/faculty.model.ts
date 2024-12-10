@@ -80,7 +80,7 @@ const facultySchema = new Schema<TFaculty, FacultyModel>(
     academicDepartment: {
       type: Schema.Types.ObjectId,
       required: [true, 'User id is required'],
-      ref: 'User',
+      ref: 'AcademicDepartment',
     },
     isDeleted: {
       type: Boolean,
@@ -128,4 +128,3 @@ facultySchema.statics.isUserExists = async function (id: string) {
 };
 
 export const Faculty = model<TFaculty, FacultyModel>('Faculty', facultySchema);
- const abdu= "temp"
