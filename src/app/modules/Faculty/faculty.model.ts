@@ -128,3 +128,4 @@ facultySchema.statics.isUserExists = async function (id: string) {
 };
 
 export const Faculty = model<TFaculty, FacultyModel>('Faculty', facultySchema);
+ const abdu= "temp"
