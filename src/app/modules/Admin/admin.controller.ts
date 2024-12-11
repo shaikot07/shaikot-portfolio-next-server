@@ -46,7 +46,7 @@ const deleteAdmin = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Admin is deleted succesfully',
+    message: 'Admin is deleted successfully',
     data: result,
   });
 });
