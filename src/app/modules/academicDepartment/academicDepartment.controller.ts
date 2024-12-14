@@ -2,7 +2,7 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import httpStatus from 'http-status';
 import { AcademicDepartmentServices } from './academicDepartment.service';
-import AppError from '../../errors/AppError';
+// import AppError from '../../errors/AppError';
 
 const createAcademicDepartment = catchAsync(async (req, res) => {
   const result =
