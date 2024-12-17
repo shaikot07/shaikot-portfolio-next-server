@@ -81,4 +81,3 @@ userSchema.statics.isJWTIssuedBeforePasswordChanged = function (
 };
 
 export const User = model<TUser, UserModel>('User', userSchema);
-
