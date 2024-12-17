@@ -26,8 +26,7 @@ const getAllOfferedCourses = catchAsync(async (req: Request, res: Response) => {
   //   });
 });
 
-const getSingleOfferedCourses = catchAsync(
-  async (req: Request, res: Response) => {
+const getSingleOfferedCourses = catchAsync(async (req: Request, res: Response) => {
     const { id } = req.params;
     //   const result =
     //   sendResponse(res, {
