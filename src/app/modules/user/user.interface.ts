@@ -1,4 +1,5 @@
 import { Model } from "mongoose";
+import { USER_ROLE } from "./user.constant";
 
 export interface TUser {
     name: string;
@@ -14,7 +15,7 @@ export interface TUser {
   
   export interface UserModel extends Model<TUser> {
     //instance methods for checking if the user exist
-    isUserExistsByCustomMail(id: string): Promise<TUser>;
+    isUserExistsById(id: string): Promise<TUser>;
     //instance methods for checking if passwords are matched
     isPasswordMatched(plainTextPassword: string, hashedPassword: string,): Promise<boolean>;
     isJWTIssuedBeforePasswordChanged(
@@ -22,9 +23,4 @@ export interface TUser {
       jwtIssuedTimestamp: number,
     ): boolean;
   }
-
-  export type TLoginUser = {
-    email: string;
-    password: string;
-  };
-  
+  export type TUserRole = keyof typeof USER_ROLE;
