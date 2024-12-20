@@ -32,14 +32,15 @@ class QueryBuilder<T> {
 
   filter() {
     const queryObj = { ...this.query };
+    console.log("Constructed Query Object:", queryObj);
 
     // Filtering
-
-    const excludeFields = ['search','sortBy','sortOrder','searchTerm', 'sort', 'limit', 'page', 'fields'];
+    const excludeFields = ['search','sortBy','sortOrder','filter','searchTerm', 'sort', 'limit', 'page', 'fields'];
     excludeFields.forEach((el) => delete queryObj[el]);
 
     if (this.query.filter) {
-      queryObj['authorId'] = this.query.filter;
+      // queryObj['authorId'] = this.query.filter;
+      queryObj['author'] = this.query.filter;
     }
 
     this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>);
