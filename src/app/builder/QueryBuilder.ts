@@ -9,9 +9,13 @@ class QueryBuilder<T> {
     this.query = query;
   }
 
-//   search method 
+  // //   search method
   search(searchableFields: string[]) {
-    const searchTerm = this?.query?.searchTerm;
+    // const searchTerm = this?.query?.searchTerm;
+    const searchTerm = this?.query?.search || this?.query?.searchTerm;
+    console.log("thiss",this.query);
+    console.log("Search Term:", searchTerm); // Add this log
+    console.log("Searchable Fields:", searchableFields); // Add this log
     if (searchTerm) {
       this.modelQuery = this.modelQuery.find({
         $or: searchableFields.map(
@@ -26,42 +30,32 @@ class QueryBuilder<T> {
     return this;
   }
 
-//   method for filter 
-
-filter() {
-    const queryObj = { ...this.query }; // copy
+  filter() {
+    const queryObj = { ...this.query };
 
     // Filtering
-    const excludeFields = ['searchTerm', 'sort', 'limit', 'page', 'fields'];
 
+    const excludeFields = ['search','sortBy','sortOrder','searchTerm', 'sort', 'limit', 'page', 'fields'];
     excludeFields.forEach((el) => delete queryObj[el]);
+
+    if (this.query.filter) {
+      queryObj['authorId'] = this.query.filter;
+    }
 
     this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>);
 
     return this;
   }
 
-//   sort method 
+  //   sort method  sort by specific fields and order
   sort() {
-    const sort =
-      (this?.query?.sort as string)?.split(',')?.join(' ') || '-createdAt';
-    this.modelQuery = this.modelQuery.sort(sort as string);
-
+    const sortBy = (this.query.sortBy as string) || 'createdAt';
+    const sortOrder =
+      (this.query.sortOrder as string)?.toLowerCase() === 'asc' ? '' : '-';
+    this.modelQuery = this.modelQuery.sort(`${sortOrder}${sortBy}`);
     return this;
   }
 
-//   pagination method 
-  paginate() {
-    const page = Number(this?.query?.page) || 1;
-    const limit = Number(this?.query?.limit) || 10;
-    const skip = (page - 1) * limit;
-
-    this.modelQuery = this.modelQuery.skip(skip).limit(limit);
-
-    return this;
-  }
-
-//   fields filtaring 
   fields() {
     const fields =
       (this?.query?.fields as string)?.split(',')?.join(' ') || '-__v';
@@ -69,7 +63,6 @@ filter() {
     this.modelQuery = this.modelQuery.select(fields);
     return this;
   }
- 
 }
 
 export default QueryBuilder;

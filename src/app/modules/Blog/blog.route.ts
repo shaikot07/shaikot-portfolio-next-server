@@ -9,6 +9,7 @@ const router = express.Router();
 router.post('/',auth('user'), BlogControllers.createBlog)
 router.patch('/:id',auth('user'), BlogControllers.updateBlogController)
 router.delete('/:id',auth('user'), BlogControllers.deleteBlogById)
+router.get('/',BlogControllers.getAllBlogs)
 
 
 
