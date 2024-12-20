@@ -9,13 +9,15 @@ import { User } from '../modules/user/user.model';
 
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization;
-    // const token = req.headers.authorization?.split(' ')[1];
-    console.log("token",token);
+    const token = req.headers.authorization?.startsWith('Bearer ')
+      ? req.headers.authorization.split(' ')[1]
+      : req.headers.authorization;
+
+    console.log('token', token);
 
     // checking if the token is missing
     if (!token) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized!');
+      throw new AppError(httpStatus.UNAUTHORIZED, 'you are not authorized!');
     }
 
     // checking if the given token is valid
@@ -23,7 +25,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
       token,
       config.jwt_access_secret as string,
     ) as JwtPayload;
-console.log("decoded result",decoded);
+    console.log('decoded result', decoded);
     const { role, userId, iat } = decoded;
 
     // checking if the user is exist
@@ -40,21 +42,12 @@ console.log("decoded result",decoded);
       throw new AppError(httpStatus.FORBIDDEN, 'This user is deleted !');
     }
 
-     // Check if the user is blocked
-     if (user.isBlocked) {
+    // Check if the user is blocked
+    if (user.isBlocked) {
       throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked!');
     }
 
-    if (
-      user.passwordChangedAt &&
-      User.isJWTIssuedBeforePasswordChanged(
-        user.passwordChangedAt,
-        iat as number,
-      )
-    ) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized !');
-    }
-
+   
     if (requiredRoles && !requiredRoles.includes(role)) {
       throw new AppError(
         httpStatus.UNAUTHORIZED,
@@ -64,7 +57,7 @@ console.log("decoded result",decoded);
 
     // req.user = decoded as JwtPayload;
     req.user = {
-      userId, 
+      userId,
       role,
       iat,
     };

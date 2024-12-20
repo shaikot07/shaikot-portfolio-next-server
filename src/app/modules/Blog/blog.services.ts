@@ -20,16 +20,19 @@ const createBlogIntoDb = async (payload: Partial<IBlog>) => {
 // get all Blog from db
 const getAllBlogs = async (query: Record<string, unknown>) => {
   console.log(query);
-  const blogQuery = new QueryBuilder(BlogModel.find().populate('author', 'name email'), query)
-  .search(BlogSearchableFields)
-  .filter()
-  .sort()
-  .fields();
+  const blogQuery = new QueryBuilder(
+    BlogModel.find().populate('author', 'name email'),
+    query,
+  )
+    .search(BlogSearchableFields)
+    .filter()
+    .sort()
+    .fields();
 
   const result = await blogQuery.modelQuery.exec();
-  console.log("Query Result:", result)
- 
-  return result
+  console.log('Query Result:', result);
+
+  return result;
 };
 
 // updated operation
@@ -81,9 +84,24 @@ const deleteBlogById = async (blogId: string, userId: string) => {
   return { message: 'Blog deleted successfully' };
 };
 
+// : Promise<void>
+const deleteBlogByAdmin = async (id: string) => {
+   const result = await BlogModel.findOneAndDelete({ _id: id });
+
+  if (!result) {
+    throw new AppError(
+      httpStatus.NOT_FOUND,
+      'Blog not found or you are not authorized to delete it!',
+    );
+  }
+
+  return { message: 'blog deleted successfully' };
+};
+
 export const BlogServices = {
   createBlogIntoDb,
   getAllBlogs,
   updateBlogById,
   deleteBlogById,
+  deleteBlogByAdmin
 };

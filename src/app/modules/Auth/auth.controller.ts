@@ -4,54 +4,34 @@ import sendResponse from '../../utils/sendResponse';
 import { AuthServices } from './auth.service';
 import { Request, Response } from 'express';
 
-
-
-const newUserRegistration = catchAsync(
-  async (req: Request, res: Response) => {
-    console.log(req.body);
-    const result =
-      await AuthServices.registerUser(req.body,);
-
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'User Registration successfully!',
-      data: result,
-    });
-  },
-);
-
-const loginUser = catchAsync(async (req, res) => {
-  const result = await AuthServices.loginUser(req.body);
-  const {  accessToken } = result;
-
+const newUserRegistration = catchAsync(async (req: Request, res: Response) => {
+  console.log(req.body);
+  const result = await AuthServices.registerUser(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'User is logged in successfully!',
-    data: {
-      accessToken,
-     
-    },
-  });
-});
-
-const changePassword = catchAsync(async (req, res) => {
-  const { ...passwordData } = req.body;
-
-  const result = await AuthServices.changePassword(req.user, passwordData);
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Password is updated succesfully!',
+    message: 'User Registration successfully!',
     data: result,
   });
 });
 
+const loginUser = catchAsync(async (req, res) => {
+  const result = await AuthServices.loginUser(req.body);
+  const { accessToken } = result;
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'user is logged in successfully!',
+    data: {
+      accessToken,
+    },
+  });
+});
 
 export const AuthControllers = {
   loginUser,
-  changePassword,
-  newUserRegistration
+
+  newUserRegistration,
 };

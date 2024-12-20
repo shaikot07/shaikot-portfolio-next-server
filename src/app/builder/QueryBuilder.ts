@@ -1,5 +1,4 @@
 import { FilterQuery, Query } from 'mongoose';
-
 class QueryBuilder<T> {
   public modelQuery: Query<T[], T>;
   public query: Record<string, unknown>;
@@ -41,8 +40,10 @@ class QueryBuilder<T> {
     if (this.query.filter) {
       // queryObj['authorId'] = this.query.filter;
       queryObj['author'] = this.query.filter;
+      
+     
     }
-
+    console.log("Final Query Object After Mapping Filter:", queryObj);
     this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>);
 
     return this;
