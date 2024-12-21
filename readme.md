@@ -55,22 +55,20 @@ Install the required packages with:
 npm install
 ---
 
-### ⚙️ Step 3: Configure Environment Variables 🔐
+### Step 3: Configure Environment Variables ⚙️
+Create a .env file in the root directory and add the following configuration:
 
-Create a `.env` file in the root directory and add the following configuration:
 
-```env
-# 🌐 Server Configuration
+🌐 Server Configuration ➡️ 
 PORT=5000
 
-# 📂 Database Configuration
+📂 Database Configuration ➡️ 
 DATABASE_URL=YOUR_DATABASE_URL
 
-# 🔒 Security Configuration
+🔒 Security Configuration ➡️ 
 BCRYPT_SALT_ROUNDS=10
 JWT_ACCESS_SECRET=YOUR_SECRET_KEY
 JWT_ACCESS_EXPIRES_IN=1h
-
 
 ---
 ### Step 4: Start the Server 🚀
@@ -78,7 +76,6 @@ Start the development server with:
 
 npm run dev
 The server will run on the port specified in your .env file.
----
 
 ## 📡 API Endpoints
 
@@ -97,6 +94,7 @@ The server will run on the port specified in your .env file.
 
 ## 🖊️ **Credits**
 
-Developed with ❤️ by:  
+Developed with 👤 by:  
 **[Saiful Islam Shaikot](#)** 🎉
 ---
+
