@@ -5,7 +5,7 @@ import { AuthServices } from './auth.service';
 import { Request, Response } from 'express';
 
 const newUserRegistration = catchAsync(async (req: Request, res: Response) => {
-  console.log(req.body);
+  // console.log(req.body);
   const result = await AuthServices.registerUser(req.body);
 
   sendResponse(res, {
@@ -32,6 +32,5 @@ const loginUser = catchAsync(async (req, res) => {
 
 export const AuthControllers = {
   loginUser,
-
   newUserRegistration,
 };

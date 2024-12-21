@@ -7,8 +7,8 @@ import httpStatus from 'http-status';
 const createBlog = catchAsync(async (req: Request, res: Response) => {
   const { title, content } = req.body;
   const userId = req.user?.userId; // from the JWT token set by auth middleware
-  console.log(title, content);
-  console.log('id asbe', userId);
+  // console.log(title, content);
+  // console.log('id asbe', userId);
   const result = await BlogServices.createBlogIntoDb({
     title,
     content,

@@ -13,7 +13,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
       ? req.headers.authorization.split(' ')[1]
       : req.headers.authorization;
 
-    console.log('token', token);
+    // console.log('token', token);
 
     // checking if the token is missing
     if (!token) {
@@ -25,7 +25,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
       token,
       config.jwt_access_secret as string,
     ) as JwtPayload;
-    console.log('decoded result', decoded);
+    // console.log('decoded result', decoded);
     const { role, userId, iat } = decoded;
 
     // checking if the user is exist
@@ -47,7 +47,6 @@ const auth = (...requiredRoles: TUserRole[]) => {
       throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked!');
     }
 
-   
     if (requiredRoles && !requiredRoles.includes(role)) {
       throw new AppError(
         httpStatus.UNAUTHORIZED,
@@ -61,7 +60,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
       role,
       iat,
     };
-    console.log('req.user: from auth mid', req.user);
+    // console.log('req.user: from auth mid', req.user)
     next();
   });
 };
