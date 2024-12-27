@@ -15,7 +15,10 @@ const registerUser = async (payload: TUser) => {
     );
   }
 
-  const result = await User.create(payload);
+  const newUser = await User.create(payload)
+  const result = await User.findById(newUser._id)
+    .select('-__v -createdAt -updatedAt -password -isBlocked -isDeleted -role') // unwanted field
+    .exec();
   return result;
 };
 const loginUser = async (payload: TLoginUser) => {
@@ -50,14 +53,14 @@ const loginUser = async (payload: TLoginUser) => {
     role: user.role,
   };
 
-  const accessToken = createToken(
+  const token = createToken(
     jwtPayload,
     config.jwt_access_secret as string,
     config.jwt_access_expires_in as string,
   );
 
   return {
-    accessToken,
+    token,
   };
 };
 

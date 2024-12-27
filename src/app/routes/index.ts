@@ -3,9 +3,6 @@ import { AuthRoutes } from '../modules/Auth/auth.route';
 import { BlogRoutes } from '../modules/Blog/blog.route';
 import { userRoutes } from '../modules/user/user.route';
 
-
-
-
 const router = Router();
 
 const moduleRoutes = [
@@ -21,9 +18,6 @@ const moduleRoutes = [
     path: '/admin',
     route: userRoutes,
   },
- 
-  
- 
 ];
 
 moduleRoutes.forEach((route) => router.use(route.path, route.route));

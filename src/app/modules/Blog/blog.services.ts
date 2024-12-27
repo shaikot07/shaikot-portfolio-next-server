@@ -12,6 +12,7 @@ const createBlogIntoDb = async (payload: Partial<IBlog>) => {
   // Populate the author field with details from the User model
   const result = await BlogModel.findById(newBlog._id)
     .populate('author', 'name email')
+    .select('-__v -createdAt -updatedAt -isPublished')
     .exec();
 
   return result;
@@ -21,7 +22,7 @@ const createBlogIntoDb = async (payload: Partial<IBlog>) => {
 const getAllBlogs = async (query: Record<string, unknown>) => {
   console.log(query);
   const blogQuery = new QueryBuilder(
-    BlogModel.find().populate('author', 'name email'),
+    BlogModel.find().populate('author', 'name email').select('-__v -createdAt -updatedAt -isPublished'),
     query,
   )
     .search(BlogSearchableFields)
@@ -61,6 +62,7 @@ const updateBlogById = async (
     { new: true },
   )
     .populate('author', 'name email')
+    .select('-__v -createdAt -updatedAt -isPublished')
     .exec();
 
   return result;

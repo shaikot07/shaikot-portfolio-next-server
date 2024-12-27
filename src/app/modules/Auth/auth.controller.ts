@@ -18,14 +18,14 @@ const newUserRegistration = catchAsync(async (req: Request, res: Response) => {
 
 const loginUser = catchAsync(async (req, res) => {
   const result = await AuthServices.loginUser(req.body);
-  const { accessToken } = result;
+  const { token } = result;
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'user is logged in successfully!',
     data: {
-      accessToken,
+      token,
     },
   });
 });
