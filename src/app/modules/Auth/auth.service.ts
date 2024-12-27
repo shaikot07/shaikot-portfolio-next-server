@@ -17,7 +17,7 @@ const registerUser = async (payload: TUser) => {
 
   const newUser = await User.create(payload)
   const result = await User.findById(newUser._id)
-    .select('-__v -createdAt -updatedAt -password -isBlocked -isDeleted -role') // unwanted field
+    .select('-__v -createdAt -updatedAt -password -isBlocked -isDeleted -role') 
     .exec();
   return result;
 };
