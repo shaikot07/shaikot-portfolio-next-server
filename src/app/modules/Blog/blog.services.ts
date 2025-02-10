@@ -97,7 +97,7 @@ const deleteBlogByAdmin = async (id: string) => {
     );
   }
 
-  return { message: 'blog deleted successfully' };
+  return { message: 'blog deleted successfullys' };
 };
 
 export const BlogServices = {
