@@ -12,11 +12,18 @@ const getAllProject = async () => {
   };
 
 
-
+  export const getProjectById = async (id: string) => {
+    // Query your database for a project by its ID
+    // Example using a mock database or ORM query like Mongoose:
+    const project = await Project.findById(id);
+  
+    return project; // Returns the project or null if not found
+  };
 
 
 
 
   export const ProjectServices = {
-    getAllProject
+    getAllProject,
+    getProjectById
   };

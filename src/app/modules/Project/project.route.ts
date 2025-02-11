@@ -6,6 +6,7 @@ const router = express.Router();
 // here add route 
 
 router.get('/',ProjectControllers.getAllProject)
+router.get('/:id',ProjectControllers.getAllProjectById)
 
 
 

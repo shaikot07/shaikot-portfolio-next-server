@@ -4,7 +4,6 @@ import { IProject } from "./project.interface";
 
 
 const ProjectSchema = new Schema<IProject>({
-  _id: { type: Number, required: true }, 
   projectName: { type: String, required: true },
   liveLink: { type: String, required: true },
   projectImg: { type: String, required: true },
